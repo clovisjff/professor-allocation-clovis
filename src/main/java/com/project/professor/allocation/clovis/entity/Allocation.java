@@ -4,16 +4,27 @@ import java.sql.Date;
 import java.time.DayOfWeek;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Allocation {
 
 	@Id
 	private Long id;
+	
+	@Enumerated(value = EnumType.STRING)
 	private DayOfWeek day;
+	
+	@Temporal(value = TemporalType.TIME)
 	private Date start;
+	
+	@Temporal(value = TemporalType.TIME)
 	private Date end;
+	
 	private Long courseId;
 	private Long professorId;
 
