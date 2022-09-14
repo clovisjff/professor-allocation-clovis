@@ -1,5 +1,8 @@
 package com.project.professor.allocation.clovis.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Department {
 
 	private Long id;

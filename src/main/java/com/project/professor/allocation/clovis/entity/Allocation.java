@@ -3,6 +3,9 @@ package com.project.professor.allocation.clovis.entity;
 import java.sql.Date;
 import java.time.DayOfWeek;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Allocation {
 
 	private Long id;
