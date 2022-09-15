@@ -3,6 +3,7 @@ package com.project.professor.allocation.clovis.entity;
 import java.util.Date;
 import java.time.DayOfWeek;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,15 +22,21 @@ public class Allocation {
 	private Long id;
 
 	@Enumerated(value = EnumType.STRING)
+	@Column(nullable = false, length = 16)
 	private DayOfWeek day;
 
 	@Temporal(value = TemporalType.TIME)
+	@Column(nullable = false)
 	private Date start;
 
 	@Temporal(value = TemporalType.TIME)
+	@Column(nullable = false)
 	private Date end;
 
+	@Column(nullable = false)
 	private Long courseId;
+	
+	@Column(nullable = false)
 	private Long professorId;
 
 	public Allocation() {

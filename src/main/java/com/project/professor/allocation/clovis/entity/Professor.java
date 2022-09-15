@@ -1,5 +1,6 @@
 package com.project.professor.allocation.clovis.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,14 @@ public class Professor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
 	private String name;
+	
+	@Column(nullable = false, unique = true )
 	private String cpf;
+	
+	@Column(nullable = false)
 	private Long departmentId;
 
 	public Professor() {
