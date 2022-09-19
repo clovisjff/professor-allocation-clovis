@@ -15,6 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
+
 
 
 @Entity
@@ -28,45 +35,33 @@ public class Allocation {
 	@Column(nullable = false, length = 16)
 	private DayOfWeek day;
 
+	@JsonFormat(pattern = "HH:mmZ")
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false)
 	private Date start;
 
+	@JsonFormat(pattern = "HH:mmZ")
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false)
 	private Date end;
-	
-	@Column(name="course_id",nullable=false)
-	private Long courseId;
-	
-	@Column(name="professor_id",nullable=false)
-	private Long professorId;
-	
-	@ManyToOne
-	@JoinColumn(name = "course_id", nullable = false, insertable = false, updatable = false)
-	private Course course;
 
-	@ManyToOne
+	@Column(name = "course_id", nullable = false)
+	private Long courseId;
+
+	@Column(name = "professor_id", nullable = false)
+	private Long professorId;
+
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "professor_id", nullable = false, insertable = false, updatable = false)
 	private Professor professor;
-	
-	public Course getCourse() {
-		return course;
-	}
 
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
-	public Professor getProfessor() {
-		return professor;
-	}
-
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
-
-	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "course_id", nullable = false, insertable = false, updatable = false)
+	private Course course;
 
 	public Allocation() {
 		super();
