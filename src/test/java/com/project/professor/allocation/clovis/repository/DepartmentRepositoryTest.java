@@ -38,7 +38,7 @@ public class DepartmentRepositoryTest {
 	@Test
 	public void create() {
 		Department depto = new Department();
-		depto.setName("Departamento de Testes");
+		depto.setName("Departamento de Programação WEB");
 		System.out.println(depto);
 
 		Department depto2 = departmentRepository.save(depto);
@@ -49,7 +49,7 @@ public class DepartmentRepositoryTest {
 	@Test
 	public void update() {
 		Department depto = new Department();
-		depto.setName("Departamento de Testes 02");
+		depto.setName("Departamento de Programação WEB");
 		depto.setId(3L);
 		System.out.println(depto);
 
@@ -60,7 +60,7 @@ public class DepartmentRepositoryTest {
 
 	@Test
 	public void deleteById() {
-		departmentRepository.deleteById(3l);
+		departmentRepository.deleteById(4l);
 	}
 
 	@Test
