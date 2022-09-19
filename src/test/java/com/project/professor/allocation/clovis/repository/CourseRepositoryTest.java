@@ -14,6 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import com.project.professor.allocation.clovis.entity.Course;
 
 
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
@@ -21,7 +22,7 @@ import com.project.professor.allocation.clovis.entity.Course;
 
 public class CourseRepositoryTest {
 	
-	@Autowired
+@Autowired
 	CourseRepository courseRepository;
 	
 	@Test
@@ -39,4 +40,39 @@ public class CourseRepositoryTest {
 		
 	}
 
+		
+	@Test
+	public void findByNameLike() {
+		List<Course> searched = courseRepository.findByNameContaining("Logic");
+		System.out.println(searched);
+	}
+	
+	
+	
+	@Test
+	public void create() {
+		Course newCourse = new Course();
+		newCourse.setName("Math Logic");
+		
+		System.out.println(courseRepository.save(newCourse));
+	}
+	
+	@Test
+	public void update() {
+		Course newCourse = new Course();
+		newCourse.setName("Algorythm");
+		newCourse.setId(1L);
+		
+		System.out.println(courseRepository.save(newCourse));
+	}
+	
+	@Test
+	public void delete() {
+		courseRepository.deleteById(1L);
+	}
+	
+	@Test
+	public void deleteAll() {
+		courseRepository.deleteAllInBatch();
+	}
 }

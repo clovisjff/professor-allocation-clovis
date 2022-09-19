@@ -1,5 +1,8 @@
 package com.project.professor.allocation.clovis.repository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,7 @@ import com.project.professor.allocation.clovis.entity.Allocation;
 
 
 
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
@@ -23,27 +27,62 @@ import com.project.professor.allocation.clovis.entity.Allocation;
 public class AllocationRepositoryTest {
 	
 	@Autowired
-	AllocationRepository allocationRepository;
+    AllocationRepository allocationRepository;
 	
 	@Test
-	public void findAll() {
+	public void findByCourseId() {
+		List<Allocation> allocationById = allocationRepository.findByCourseId(1L);
 		
-		List<Allocation> allocationList = allocationRepository.findAll();
-		System.out.println(allocationList);
+		System.out.println(allocationById);
+	}
+	
+	@Test
+	public void findByProfessorId() {
+		List<Allocation> allocationById = allocationRepository.findByProfessorId(4L);
 		
+		System.out.println(allocationById);
 	}
 	
 	@Test
 	public void findById() {
-		Optional<Allocation> allocationListById = allocationRepository.findById(1L);
-		System.out.println(allocationListById.orElse(null));
-		
+		Optional<Allocation> allocationById = allocationRepository.findById(1L);
+		System.out.println(allocationById.orElse(null));
 	}
-
-//	@Test
-//	public void teste01() {
-//		List<Allocation> teste01 = allocationRepository.findByProfessorId(2L);
-//		System.out.println(teste01);
-//	}
+	
+	@Test
+	public void findAll() {
+		List<Allocation> AllAllocations = allocationRepository.findAll();
+		System.out.println(AllAllocations);
+	}
+	
+	@Test
+	public void create() throws ParseException {
+		Allocation newAllocation = new Allocation();
+		newAllocation.setCourseId(1L);
+		newAllocation.setProfessorId(4L);
+		newAllocation.setDay(DayOfWeek.MONDAY);
+		
+		SimpleDateFormat newDate = new SimpleDateFormat("HH:mmZ");
+		newAllocation.setStart(newDate.parse("12:00-0300"));
+		newAllocation.setEnd(newDate.parse("14:00-0300"));
+		
+		System.out.println(allocationRepository.save(newAllocation));
+	}
+	
+	@Test
+	public void update() throws ParseException {
+		Allocation newAllocation = new Allocation();
+		newAllocation.setCourseId(1L);
+		newAllocation.setProfessorId(4L);
+		newAllocation.setId(1L);
+		
+		newAllocation.setDay(DayOfWeek.MONDAY);
+		
+		SimpleDateFormat newDate = new SimpleDateFormat("HH:mmZ");
+		newAllocation.setStart(newDate.parse("10:00-0300"));
+		newAllocation.setEnd(newDate.parse("12:00-0300"));
+		
+		System.out.println(allocationRepository.save(newAllocation));
+	}
 //	
 }
