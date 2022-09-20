@@ -6,14 +6,12 @@ import com.project.professor.allocation.clovis.repository.CourseRepository;
 
 @Service
 public class CourseService {
-	
-	private CourseRepository courseRepository;
+
+	private final CourseRepository courseRepository;
 
 	public CourseService(CourseRepository courseRepository) {
 		super();
 		this.courseRepository = courseRepository;
 	}
-	
-	
 
 }

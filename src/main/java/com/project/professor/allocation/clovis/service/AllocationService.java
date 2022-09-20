@@ -6,14 +6,12 @@ import com.project.professor.allocation.clovis.repository.AllocationRepository;
 
 @Service
 public class AllocationService {
-	
-	private AllocationRepository allocationRepository;
+
+	private final AllocationRepository allocationRepository;
 
 	public AllocationService(AllocationRepository allocationRepository) {
 		super();
 		this.allocationRepository = allocationRepository;
 	}
-	
-	
 
 }

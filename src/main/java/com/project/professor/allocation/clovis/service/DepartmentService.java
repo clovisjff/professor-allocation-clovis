@@ -6,16 +6,12 @@ import com.project.professor.allocation.clovis.repository.DepartmentRepository;
 
 @Service
 public class DepartmentService {
-	
-	private DepartmentRepository departmentRepository;
-	
+
+	private final DepartmentRepository departmentRepository;
 
 	public DepartmentService(DepartmentRepository departmentRepository) {
 		super();
 		this.departmentRepository = departmentRepository;
 	}
-	
-	
-	
 
 }

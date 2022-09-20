@@ -7,7 +7,7 @@ import com.project.professor.allocation.clovis.repository.ProfessorRepository;
 @Service
 public class ProfessorService {
 
-	private ProfessorRepository professorRepository;
+	private final ProfessorRepository professorRepository;
 
 	public ProfessorService(ProfessorRepository professorRepository) {
 		super();
