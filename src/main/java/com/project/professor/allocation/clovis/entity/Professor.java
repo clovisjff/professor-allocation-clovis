@@ -8,24 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Professor {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable=false)
 	private String name;
 	
-	@Column(nullable = false, unique = true )
+	@Column(nullable=false,unique=true)
 	private String cpf;
 	
-	@Column(name = "department_id",nullable = false)
+	@Column(name="department_id",nullable=false)
 	private Long departmentId;
 	
 	@ManyToOne
-	@JoinColumn(name = "department_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name="department_id",nullable=false,insertable=false,updatable=false)
 	private Department department;
 
 	public Professor() {
@@ -63,7 +63,6 @@ public class Professor {
 	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
 	}
-	
 
 	public Department getDepartment() {
 		return department;
