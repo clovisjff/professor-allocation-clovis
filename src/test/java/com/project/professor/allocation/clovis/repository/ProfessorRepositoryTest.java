@@ -47,5 +47,50 @@ public class ProfessorRepositoryTest {
 		System.out.println(profListById.orElse(null));
 		
 	}
+	@Test
+    public void save_create() {
+        // Arrange
+        Professor professor = new Professor();
+        professor.setId(null);
+        professor.setName("Teste 2");
+        professor.setCpf("22222222222");
+        professor.setDepartmentId(1L);
 
+        // Act
+        professor = professorRepository.save(professor);
+
+        // Print
+        System.out.println(professor);
+    }
+
+    @Test
+    public void save_update() {
+        // Arrange
+        Professor professor = new Professor();
+        professor.setId(1L);
+        professor.setName("Teste 2");
+        professor.setCpf("22222222222");
+        professor.setDepartmentId(1L);
+
+        // Act
+        professor = professorRepository.save(professor);
+
+        // Print
+        System.out.println(professor);
+    }
+
+    @Test
+    public void deleteById() {
+        // Arrange
+        Long id = 1L;
+
+        // Act
+        professorRepository.deleteById(id);
+    }
+
+    @Test
+    public void deleteAll() {
+        // Act
+        professorRepository.deleteAllInBatch();
+    }
 }
