@@ -44,9 +44,26 @@ public class AllocationService {
 		return allocations;
 	}
 
+	private Allocation saveInternal(Allocation allocation) {
+		Long professorId = allocation.getProfessorId();
+		Professor professor = professorService.findById(professorId);
+
+		Long courseId = allocation.getCourseId();
+		Course course = courseService.findById(courseId);
+
+		Allocation allocationSaved = allocationRepository.save(allocation);
+
+		allocationSaved.setProfessorId(professorId);
+		allocationSaved.setCourseId(courseId);
+
+		return allocationSaved;
+	}
+
 	public Allocation create(Allocation allocation) {
+
 		allocation.setId(null);
-		return allocationRepository.save(allocation);
+		return saveInternal(allocation);
+
 	}
 
 	public Allocation update(Allocation allocation) {
@@ -55,7 +72,7 @@ public class AllocationService {
 
 		if (id != null && allocationRepository.existsById(id)) {
 
-			return allocationRepository.save(allocation);
+			return saveInternal(allocation);
 		} else {
 			return null;
 		}
