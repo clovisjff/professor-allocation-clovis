@@ -58,7 +58,14 @@ public class ProfessorService {
 
 	public Professor create(Professor professor) {
 		professor.setId(null);
-		return saveInternal(professor);
+		
+		Department department = departmentService.findById(professor.getDepartmentId());
+				
+		professor = professorRepository.save(professor);
+		professor.setDepartment(department);
+		
+		
+		return professor;
 	}
 
 	public Professor update(Professor professor) {

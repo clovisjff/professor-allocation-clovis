@@ -45,6 +45,7 @@ public class AllocationService {
 	}
 
 	private Allocation saveInternal(Allocation allocation) {
+		
 		Long professorId = allocation.getProfessorId();
 		Professor professor = professorService.findById(professorId);
 
@@ -58,6 +59,30 @@ public class AllocationService {
 
 		return allocationSaved;
 	}
+	
+	private boolean hasCollision(Allocation currentAllocation, Allocation newAllocation) {
+		
+		return !currentAllocation.getId().equals(newAllocation.getId())
+				&& currentAllocation.getDay() == newAllocation.getDay()
+				&& currentAllocation.getStart().compareTo(newAllocation.getEnd()) < 0
+				&& newAllocation.getStart().compareTo(currentAllocation.getEnd()) < 0;
+	}
+	private boolean hasCollision(Allocation newAllocation) {
+		boolean hasCollision = false;
+
+		List<Allocation> currentAllocations = allocationRepository.findByProfessorId(newAllocation.getProfessorId());
+
+		for (Allocation currentAllocation : currentAllocations) {
+			hasCollision = hasCollision(currentAllocation, newAllocation);
+			if (hasCollision) {
+				break;
+			}
+		}
+
+		return hasCollision;
+	}
+
+	
 
 	public Allocation create(Allocation allocation) {
 
