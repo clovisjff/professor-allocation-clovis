@@ -17,8 +17,11 @@ public class DepartmentService {
 		this.departmentRepository = departmentRepository;
 	}
 
-	public Department findById(Long id) {
+	public List<Department> findByNameContaining(String name) {
+		return departmentRepository.findByNameContaining(name);
+	}
 
+	public Department findById(Long id) {
 		Department department = departmentRepository.findById(id).orElse(null);
 		return department;
 	}
@@ -30,6 +33,11 @@ public class DepartmentService {
 	}
 
 	public Department create(Department department) {
+		department.setId(null);
+		return departmentRepository.save(department);
+	}
+
+	public Department save(Department department) {
 		department.setId(null);
 		return departmentRepository.save(department);
 	}
