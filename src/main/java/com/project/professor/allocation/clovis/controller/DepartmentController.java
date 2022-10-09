@@ -31,7 +31,7 @@ public class DepartmentController {
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	// @ResponseStatus(HttpStatus.OK)
+	 @ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Department>> findAll(@RequestParam(name = "name", required = false) String name) {
 //		List<Department> departments = departmentService.findAll();
 		List<Department> departments;
@@ -44,7 +44,7 @@ public class DepartmentController {
 	}
 
 	@GetMapping(path = "/{department_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	// @ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Department> findById(@PathVariable(name = "department_id") Long id) {
 		Department department = departmentService.findById(id);
 		if (department == null) {
@@ -55,13 +55,13 @@ public class DepartmentController {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	// @ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Department> create(@RequestBody Department department) {
 		try {
 			Department depto = departmentService.save(department);
-			return new ResponseEntity<Department>(depto, HttpStatus.CREATED);
+			return new ResponseEntity<>(depto, HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<Department>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
